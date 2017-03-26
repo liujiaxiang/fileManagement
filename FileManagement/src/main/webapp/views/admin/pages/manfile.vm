@@ -1,0 +1,125 @@
+
+	<!-- 输出部门信息弹框 -->
+	<div id="department">
+		<span class="title"><b>添加文件</b></span>
+		<form id="addFile" class="form-horizontal" role="form" enctype="multipart/form-data" method="post">
+			<div class="form-group">
+				<label for="mfile" class="col-sm-4 control-label" >请选择文件：</label>
+				<div class="col-sm-5" style="margin-top: 7px">
+					<input type="file" id="mfile" name="mfile" onchange="fileSelected1();">
+				</div>
+			</div>
+			<div class="form-group submit" style="display: block;text-align: center;">
+					<div>
+						<input id="submit" type="submit" class="btn btn-primary" value="添加"></input>
+					</div>
+				</div>
+		</form>
+	</div>
+	
+    <!-- Content Header (Page header) -->
+    <div id="content">
+    <section class="content-header">
+      <h1>
+       	 教务管理系统—
+        <small>${department.departmentName}${folder.folderName}文件列表</small>
+  
+      </h1>
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+      <!-- Small boxes (Stat box) -->
+      <div class="row">
+        <div class="col-lg-3 col-xs-6" style="cursor: pointer;" onclick="addFile()">
+          <!-- small box -->
+          <div class="small-box bg-aqua">
+            <div class="inner">
+              <h3>文件管理</h3>
+
+              <p style="margin-left: 4px">点我添加文件</p>
+            </div>
+            <div class="icon">
+              <i class="fa fa-folder"></i>
+            </div>
+          </div>
+         
+        </div>
+        <div class="filelist" style="margin-left:10px;">
+   		   <table class="table table-bordered">
+            <caption>（教务处）文件</caption>
+            <thead>
+              <tr>
+                <th>序号</th>
+                <th>名称</th>
+                <th>上传者</th>
+                <th>删除</th>
+              </tr>
+            </thead>
+            <tbody>
+            #foreach($file in $files)
+              <tr>
+                <td>$velocityCount</td>
+                <td><a href="$file.filePath" download="$file.fileName">$file.fileName</a></td>
+                <td>$file.uploadUser</td>
+                <td><a href="delFile?file_id=$file.id&folder_id=$file.fId"><i class="fa fa-remove"></i></a></td>
+              </tr>
+            #end
+            </tbody>
+          </table>
+   	     </div>
+   	     <div class="page_btn" style="float: left;margin-left: 20px;">
+		 <nav aria-label="Page navigation">
+	        <ul class="pagination" id="pagination"></ul>
+	    </nav>
+	    </div>
+        <!-- ./col -->
+      </div>
+      <!-- /.row -->
+      </div>
+      <!-- /.row (main row) -->
+ 	
+    </section>
+    </div>
+    <!-- /.content -->
+    
+ <script>
+
+ $(function () {
+     var obj = $('#pagination').twbsPagination({
+         totalPages: $pageNum,
+         visiblePages: 10,
+         onPageClick: function (event, page) {
+             console.info(page + ' (from options)');
+             var sel = ".page-item:eq("+($curPage+1)+")";
+             //这里把active都删了，然后再添加新的active
+             $(".page-item").each(function(){
+             	$(".page-item").removeClass("active");
+             	$(".page-item").removeClass("disabled");
+             });
+             $(sel).addClass("active");
+             
+            
+         }
+     }).on('page', function (event, page) {
+         console.info(page + ' (from event listening)');
+         var startRow = (page-1) * $pageSize;
+         window.location.href = "manfile?u_id=$f_User.id&f_id=$folder.id&d_id=$department.id&startRow="+startRow+"&page="+page;
+        
+     });
+ });
+ function addFile()
+ {
+	 var department = document.getElementById("department");
+	 department.setAttribute("style", "display:block");
+	 
+	 var form =  document.getElementById("addFile");
+	 form.setAttribute("action", "addFile?u_id=$f_User.id&f_id=$folder.id&d_id=$folder.dId&startRow=$startRow&page=$curPage");
+ }
+ function closeDialog()
+ {
+	 var department = document.getElementById("department");
+	 department.removeAttribute("style");
+	 department.setAttribute("style", "display:none");
+ }
+ </script>

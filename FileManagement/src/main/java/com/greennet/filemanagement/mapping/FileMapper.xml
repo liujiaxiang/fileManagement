@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.greennet.filemanagement.dao.FileMapper" >
+  <resultMap id="BaseResultMap" type="com.greennet.filemanagement.model.File" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <id column="f_id" property="fId" jdbcType="INTEGER" />
+    <result column="file_path" property="filePath" jdbcType="VARCHAR" />
+    <result column="file_name" property="fileName" jdbcType="VARCHAR" />
+    <result column="upload_user" property="uploadUser" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, f_id, file_path, file_name, upload_user
+  </sql>
+  
+  <select id="selectAll" resultMap="BaseResultMap" parameterType="com.greennet.filemanagement.model.File" >
+    select 
+    <include refid="Base_Column_List" />
+    from files
+  </select>
+  
+  <select id="getFileNum" resultType="java.lang.Integer" parameterType="com.greennet.filemanagement.model.File" >
+    select count(*) 
+    from files where f_id=#{0}
+  </select>
+  
+  <select id="getFilePage" resultMap="BaseResultMap" parameterType="com.greennet.filemanagement.model.File" >
+     select 
+    <include refid="Base_Column_List" />
+    from files where f_id=#{2} ORDER BY id desc limit #{0}, #{1} 
+  </select>
+  
+   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from files
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from files
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  
+  <delete id="deleteByFolderId" parameterType="java.lang.Integer" >
+    delete from files 
+    where f_id = #{0}
+  </delete>
+  
+  <insert id="insert" parameterType="com.greennet.filemanagement.model.File" >
+    insert into files (id, f_id, file_path, 
+      file_name, upload_user)
+    values (#{id,jdbcType=INTEGER}, #{fId,jdbcType=INTEGER}, #{filePath,jdbcType=VARCHAR}, 
+      #{fileName,jdbcType=VARCHAR}, #{uploadUser,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.greennet.filemanagement.model.File" >
+    insert into files
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="fId != null" >
+        f_id,
+      </if>
+      <if test="filePath != null" >
+        file_path,
+      </if>
+      <if test="fileName != null" >
+        file_name,
+      </if>
+      <if test="uploadUser != null" >
+        upload_user,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="fId != null" >
+        #{fId,jdbcType=INTEGER},
+      </if>
+      <if test="filePath != null" >
+        #{filePath,jdbcType=VARCHAR},
+      </if>
+      <if test="fileName != null" >
+        #{fileName,jdbcType=VARCHAR},
+      </if>
+      <if test="uploadUser != null" >
+        #{uploadUser,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.greennet.filemanagement.model.File" >
+    update files
+    <set >
+      <if test="fId != null" >
+        f_id = #{fId,jdbcType=INTEGER},
+      </if>
+      <if test="filePath != null" >
+        file_path = #{filePath,jdbcType=VARCHAR},
+      </if>
+      <if test="fileName != null" >
+        file_name = #{fileName,jdbcType=VARCHAR},
+      </if>
+      <if test="uploadUser != null" >
+        upload_user = #{uploadUser,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.greennet.filemanagement.model.File" >
+    update files
+    set f_id = #{fId,jdbcType=INTEGER},
+      file_path = #{filePath,jdbcType=VARCHAR},
+      file_name = #{fileName,jdbcType=VARCHAR},
+      upload_user = #{uploadUser,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

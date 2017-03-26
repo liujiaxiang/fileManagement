@@ -1,0 +1,80 @@
+ <!-- Left side column. contains the logo and sidebar -->
+  <aside class="main-sidebar">
+    <!-- sidebar: style can be found in sidebar.less -->
+    <section class="sidebar">
+      <!-- Sidebar user panel -->
+      <div class="user-panel">
+        <div class="pull-left image">
+          <img src="./views/admin/asserts/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+        </div>
+        <div class="pull-left info">
+          <p>${user.username}</p>
+          <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
+        </div>
+      </div>
+      <!-- sidebar menu: : style can be found in sidebar.less -->
+      <ul class="sidebar-menu">
+        <li class="header">功能区</li>
+        <!-- 部门管理 -->
+        <li class="active treeview">
+          <a href="#">
+            <i class="fa fa-dashboard"></i> <span>部门管理</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+            <li id="menu1"><a href="showdepartment"><i class="fa fa-circle-o"></i>查看部门</a></li>
+            <li id="menu2"><a href="adddepartment"><i class="fa fa-circle-o"></i>添加部门</a></li>
+            <li id="menu3"><a href="mandepartment"><i class="fa fa-circle-o"></i>管理部门</a></li>
+          </ul>
+        </li>
+        
+        <li class="header">友情链接</li>
+        <li><a href="http://tjyj.greennet.org.cn/" target="_blank"><i class="fa fa-circle-o text-red"></i> <span>资源平台</span></a></li>
+        <li><a href="http://tjsp.greennet.org.cn/" target="_blank"><i class="fa fa-circle-o text-yellow"></i> <span>视频平台</span></a></li>
+        <li><a href="http://www.tjxjyj.cn/" target="_blank"><i class="fa fa-circle-o text-aqua"></i> <span>台江教育局</span></a></li>
+      </ul>
+    </section>
+    <!-- /.sidebar -->
+  </aside>
+
+  <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper" style="min-height: 600px ! important;">
+		#parse($MainPage) 
+  </div>
+  <!-- /.content-wrapper -->
+  <footer class="main-footer">
+    <div class="pull-right hidden-xs">
+      <b>Version</b> 1.0
+    </div>
+    <strong>Copyright &copy; 2014-2016 <a href="http://www.tjxjyj.cn/">台江教育局</a>.</strong> All rights
+    reserved. 技术支持：<a href="http://www.greennet.org.cn">贵州格林耐特科技股份有限公司(QQ:401115780)</a>
+  </footer>
+<script>
+//控制功能区的active
+window.onload=selectMenu;
+function selectMenu()
+{
+	var menu1 = document.getElementById("menu1");
+	var menu2 = document.getElementById("menu2");
+	var menu3 = document.getElementById("menu3");
+	if ("$op" == "show") {
+		menu1.setAttribute("class", "active");
+		menu2.removeAttribute("class");
+		menu3.removeAttribute("class");
+	}
+	else if ("$op" == "add") {
+		menu2.setAttribute("class", "active");
+		menu1.removeAttribute("class");
+		menu3.removeAttribute("class");
+	}
+	else if("$op" == "man")
+	{
+		menu3.setAttribute("class", "active");
+		menu1.removeAttribute("class");
+		menu2.removeAttribute("class");
+	}
+}
+</script>
+<!-- ./wrapper -->

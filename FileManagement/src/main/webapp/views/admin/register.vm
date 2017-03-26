@@ -1,0 +1,82 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<title>Home</title>
+<!-- Custom Theme files -->
+ <link rel="stylesheet" href="./views/admin/asserts/dist/css/login.css">
+<!-- Custom Theme files -->
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" /> 
+<style>
+    body{
+		font:"微软雅黑";
+	}
+
+	.departnameSelect{
+   /* the width and the height of your image */
+    width: 370px;
+    height: 46px;
+    overflow: hidden;
+    margin-bottom:10px;
+    border: solid 1px #ccc;
+    border-radius:20px;
+}
+
+	.departnameSelect select{
+	    outline: none;
+    	font-size: 15px;
+    	font-weight: 500;
+        margin: 0px 0px 12px 0px;
+	    -webkit-appearance:none;
+	    -moz-appearance:none;
+	    appearance:none;
+	    background:transparent;
+	    border:none;
+	    padding-left:10px;
+	    width: 380px;
+	    height:100%;    
+	}
+</style>
+
+</head>
+<body>
+<div class="login">
+	<h2>教务管理系统</h2>
+	<div class="login-top">
+		<h1>注册</h1>
+		<form action="registerResult" method="post" id="myForm">
+			<input type="text" placeholder="请输入教师姓名" id="username" name="username">
+			<input type="password" placeholder="请输入登录密码" id="password" name="password">
+			<div class="departnameSelect">
+			<select id="departname" name="departname">  
+			   <optgroup label="请选择部门">  
+			   #foreach($department in $departments)
+			    <option value="$department.departmentName" >$department.departmentName</option>
+			    #end
+			  </optgroup> 
+			</select> 
+			</div>
+			
+			<div class="login_btn">
+	    		<input type="submit" value="注册" >
+	    	</div>
+	    </form>
+	    
+	</div>
+	<div class="important" style="margin: 20px;color: red;">
+		注意:教师名称请输入真实姓名，所在部门根据学校决定，比如教务处，数学组，语文组等等。
+	</div>
+
+</div>	
+<div class="copyright">
+	<p>Copyright &copy; 2016.台江教育局 All rights reserved.<a target="_blank" href="#">教务管理系统</a> - 更多信息 <a href="#" target="_blank" title="">台江教育局</a></p>
+</div>
+<script type="text/javascript">
+function register()
+{
+	window.location.href="register";
+}
+</script>
+</body>
+</html>

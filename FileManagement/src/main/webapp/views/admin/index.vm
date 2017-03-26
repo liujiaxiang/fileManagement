@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    #parse("./admin/common/params.vm")
+</head>
+<body class="hold-transition skin-blue sidebar-mini">
+	<div class="wrapper">
+		#parse("./admin/common/header.vm")
+		#parse("./admin/pages/main.vm")
+	</div>
+	#parse("./admin/common/scripts.vm")
+</body>
+</html>	

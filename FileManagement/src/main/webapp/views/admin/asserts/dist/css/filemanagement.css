@@ -1,0 +1,37 @@
+@CHARSET "UTF-8";
+
+#department{
+	color:#FFF;
+	display:none;
+	position:fixed;
+	background:gray;
+	z-index:90;
+	opacity:0.9;
+	top:200px;
+	left:40%;
+	width:500px;
+	height:300px
+}
+
+#department .title{
+	font-size:25px;
+	margin:30px;
+	display:block;
+	text-align: center;
+}
+
+#department .add_btn{
+	text-align: center;
+}
+#department .add_btn button{
+	width:100px;
+}
+	
+.filelist{
+	margin-left:10px;
+}	
+	
+	
+	
+	
+}

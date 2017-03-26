@@ -1,0 +1,85 @@
+
+	<!-- 输出部门信息弹框 -->
+	<div id="department">
+		<span class="title"><b>添加文件夹</b></span>
+		<form id="addFolder" action="addFolder?d_id=$department.id" class="form-horizontal" role="form" method="post">
+			<div class="form-group">
+				<label for="folder_name" class="col-sm-4 control-label">文件夹名称</label>
+				<div class="col-sm-5">
+					<input type="text" class="form-control" id="folder_name" name="folder_name" 
+						   placeholder="请输入文件夹名称">
+				</div>
+			</div>
+			<div class="form-group add_btn">
+					<button type="submit" class="btn btn-success">确定</button>
+					<button type="button" class="btn btn-success" onclick="closeDialog()">取消</button>
+			</div>
+		</form>
+	</div>
+	
+    <!-- Content Header (Page header) -->
+    <div id="content">
+    <section class="content-header">
+      <h1>
+       	 教务管理系统—
+        <small><b>${department.departmentName}文件管理</b></small>
+      </h1>
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+      <!-- Small boxes (Stat box) -->
+      <div class="row">
+      <!-- 添加个人文件夹 -->
+      <div class="col-lg-3 col-xs-6">
+          <!-- small box -->
+          <div class="small-box bg-aqua">
+            <div class="inner">
+              <h3>文件夹名称</h3>
+
+              <p style="margin-left: 4px">比如“工作计划”</p>
+            </div>
+            <div class="icon">
+              <i class="fa fa-users"></i>
+            </div>
+            <a href="#" class="small-box-footer" onclick="addFolder()">添加文件夹<i class="fa fa-arrow-circle-right"></i></a>
+          </div>
+        </div>
+		<!-- 管理部门 -->
+        #foreach($folder in $folders)
+        <div class="col-lg-3 col-xs-6">
+          <!-- small box -->
+          <div class="small-box bg-aqua">
+            <div class="inner">
+              <h3>$folder.folderName</h3>
+ 			   <a href="delfolder?f_id=$folder.id&d_id=$folder.dId" style="position: absolute;right: 10px;top:0;"><i class="fa fa-remove" style="display: inline-block;font-size: 20px"></i></a>
+              <p style="margin-left: 4px">文件夹</p>
+            </div>
+            <!-- href="manfile?startRow=0"  -->
+            <a href="manfile?startRow=0&f_id=$folder.id&u_id=$folder.uId&d_id=$folder.dId" class="small-box-footer">文件管理  <i class="fa fa-arrow-circle-right"></i></a>
+          </div>
+        </div>
+        #end
+      </div>
+      <!-- /.row -->
+      </div>
+      <!-- /.row (main row) -->
+
+    </section>
+    </div>
+    <!-- /.content -->
+    
+ <script>
+ function addFolder()
+ {
+	 var department = document.getElementById("department");
+	 department.setAttribute("style", "display:block");
+ }
+ 
+ function closeDialog()
+ {
+	 var department = document.getElementById("department");
+	 department.removeAttribute("style");
+	 department.setAttribute("style", "display:none");
+ }
+ </script>

@@ -1,0 +1,113 @@
+
+	<!-- 输出部门信息弹框 -->
+	<div id="department">
+		<span class="title"><b>修改部门</b></span>
+		<form id="modDepartment" class="form-horizontal" role="form" method="post">
+			<div class="form-group">
+				<label for="department_name" class="col-sm-4 control-label">部门名称</label>
+				<div class="col-sm-5">
+					<input type="text" class="form-control" id="department_name" name="department_name" 
+						   placeholder="请输入新部门名称">
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="department_des" class="col-sm-4 control-label">部门描述</label>
+				<div class="col-sm-5">
+					<input type="text" class="form-control" id="department_des" name="department_des" 
+						   placeholder="请输入新部门描述">
+				</div>
+			</div>
+			<div class="form-group add_btn">
+					<button type="submit" class="btn btn-success">更改</button>
+					<button type="button" class="btn btn-success" onclick="closeDialog()">取消</button>
+			</div>
+		</form>
+	</div>
+	
+    <!-- Content Header (Page header) -->
+    <div id="content">
+    <section class="content-header">
+      <h1>
+       	 教务管理系统—
+        <small><b>部门管理</b></small>
+      </h1>
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+      <!-- Small boxes (Stat box) -->
+      <div class="row">
+		<!-- 管理部门 -->
+        #foreach($department in $departments)
+        <div class="col-lg-3 col-xs-6">
+          <!-- small box -->
+          <div class="small-box bg-aqua">
+            <div class="inner">
+              <h3>$department.departmentName</h3>
+ 			  <a onclick="modDialog($department.id)"  style="cursor: pointer;position: absolute;right: 40px;top:0;"><i class="fa fa-pencil" style="display: inline-block;font-size: 20px"></i></a>
+              <a href="deldepartment?id=$department.id" style="position: absolute;right: 10px;top:0;"><i class="fa fa-remove" style="display: inline-block;font-size: 20px"></i></a>
+            
+              <p style="margin-left: 4px">$department.departmentDes</p>
+            </div>
+            <!-- href="manfile?startRow=0"  -->
+            <a href="manDepartmentFolder?d_id=$department.id" class="small-box-footer">部门文件管理  <i class="fa fa-arrow-circle-right"></i></a>
+          </div>
+        </div>
+        #end
+         <!--
+        <div class="col-lg-3 col-xs-6">
+
+          <div class="small-box bg-yellow">
+            <div class="inner">
+              <h3>44</h3>
+
+              <p>User Registrations</p>
+            </div>
+            <div class="icon">
+              <i class="ion ion-person-add"></i>
+            </div>
+            <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+          </div>
+        </div>
+        -->
+        <!--
+        <div class="col-lg-3 col-xs-6">
+          <div class="small-box bg-red">
+            <div class="inner">
+              <h3>65</h3>
+
+              <p>Unique Visitors</p>
+            </div>
+            <div class="icon">
+              <i class="ion ion-pie-graph"></i>
+            </div>
+            <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+          </div>
+        </div>
+          -->
+      </div>
+      <!-- /.row -->
+      </div>
+      <!-- /.row (main row) -->
+
+    </section>
+    </div>
+    <!-- /.content -->
+    
+ <script>
+ function modDialog(id)
+ {
+	 var department = document.getElementById("department");
+	 department.setAttribute("style", "display:block");
+	 
+	 var form =  document.getElementById("modDepartment");
+	 form.setAttribute("action", "moddepartment?id="+id);
+ }
+ 
+ function closeDialog()
+ {
+	 var department = document.getElementById("department");
+	 department.removeAttribute("style");
+	 department.setAttribute("style", "display:none");
+ }
+ </script>

@@ -1,0 +1,62 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<title>Home</title>
+<!-- Custom Theme files -->
+ <link rel="stylesheet" href="./views/admin/asserts/dist/css/login.css">
+<!-- Custom Theme files -->
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" /> 
+<style>
+    body{
+		font:"微软雅黑";
+	}
+</style>
+
+</head>
+<body>
+<div class="login">
+	<h2>教务管理系统</h2>
+	<div class="login-top">
+		<h1>登录</h1>
+		<form action="checkLogin" method="post" id="myForm">
+			<input type="text" placeholder="用户名" id="username" name="username">
+			<input type="password" placeholder="密码" id="password" name="password">
+				#if($user == "null")
+               		<p style="margin: 10px;color: red;text-align: center;">用户名或者密码错误</p>
+               		#end
+               		#if($user == "notLogin")
+               		<p style="margin-top: 10px;color: red">对不起，请先登录！</p>
+               	#end
+			<div class="login_btn">
+	    		<input type="submit" value="登录" >
+	    		<input onclick="register()" type="button" value="注册" >
+	    	</div>
+	    </form>
+	    
+	</div>
+
+</div>	
+<div class="copyright">
+	<p>Copyright &copy; 2016.台江教育局 All rights reserved.<a target="_blank" href="#">教务管理系统</a> - 更多信息 <a href="#" target="_blank" title="">台江教育局</a></p>
+</div>
+<script type="text/javascript">
+function register()
+{
+	window.location.href="register";
+}
+window.onload=ShowMessage; 
+
+function ShowMessage()
+{
+	
+	if ("success" == "$result") 
+	{
+		console.log("$result");
+		alert("注册成功，请登录！");
+	}
+}
+</script>
+</body>
+</html>
